@@ -1,0 +1,96 @@
+2022-12-21 23:19:23.580 +01:00 [INF] Registered 5 endpoints in 147 milliseconds.
+2022-12-21 23:19:23.661 +01:00 [INF] User profile is available. Using '/Users/maciejw/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2022-12-21 23:19:24.199 +01:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+PRAGMA journal_mode = 'wal';
+2022-12-21 23:19:24.238 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Contributors" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_Contributors" PRIMARY KEY AUTOINCREMENT,
+    "Name" TEXT NOT NULL
+);
+2022-12-21 23:19:24.238 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Projects" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_Projects" PRIMARY KEY AUTOINCREMENT,
+    "Name" TEXT NOT NULL,
+    "Priority" INTEGER NOT NULL
+);
+2022-12-21 23:19:24.238 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "ToDoItems" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_ToDoItems" PRIMARY KEY AUTOINCREMENT,
+    "Title" TEXT NOT NULL,
+    "Description" TEXT NOT NULL,
+    "ContributorId" INTEGER NULL,
+    "IsDone" INTEGER NOT NULL,
+    "ProjectId" INTEGER NULL,
+    CONSTRAINT "FK_ToDoItems_Projects_ProjectId" FOREIGN KEY ("ProjectId") REFERENCES "Projects" ("Id")
+);
+2022-12-21 23:19:24.238 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_ToDoItems_ProjectId" ON "ToDoItems" ("ProjectId");
+2022-12-21 23:19:24.360 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "ToDoItems" AS "t")
+2022-12-21 23:19:24.375 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."Name", "p"."Priority"
+FROM "Projects" AS "p"
+2022-12-21 23:19:24.377 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."ContributorId", "t"."Description", "t"."IsDone", "t"."ProjectId", "t"."Title"
+FROM "ToDoItems" AS "t"
+2022-12-21 23:19:24.378 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "c"."Id", "c"."Name"
+FROM "Contributors" AS "c"
+2022-12-21 23:19:24.428 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 7)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Contributors" ("Name")
+VALUES (@p0)
+RETURNING "Id";
+2022-12-21 23:19:24.435 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (Size = 8)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Contributors" ("Name")
+VALUES (@p0)
+RETURNING "Id";
+2022-12-21 23:19:24.465 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (Size = 12), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Projects" ("Name", "Priority")
+VALUES (@p0, @p1)
+RETURNING "Id";
+2022-12-21 23:19:24.467 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[@p2='?' (DbType = Int32), @p3='?' (Size = 31), @p4='?' (DbType = Boolean), @p5='?' (DbType = Int32), @p6='?' (Size = 18)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "ToDoItems" ("ContributorId", "Description", "IsDone", "ProjectId", "Title")
+VALUES (@p2, @p3, @p4, @p5, @p6)
+RETURNING "Id";
+2022-12-21 23:19:24.468 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (Size = 81), @p2='?' (DbType = Boolean), @p3='?' (DbType = Int32), @p4='?' (Size = 15)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "ToDoItems" ("ContributorId", "Description", "IsDone", "ProjectId", "Title")
+VALUES (@p0, @p1, @p2, @p3, @p4)
+RETURNING "Id";
+2022-12-21 23:19:24.468 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (Size = 59), @p2='?' (DbType = Boolean), @p3='?' (DbType = Int32), @p4='?' (Size = 20)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "ToDoItems" ("ContributorId", "Description", "IsDone", "ProjectId", "Title")
+VALUES (@p0, @p1, @p2, @p3, @p4)
+RETURNING "Id";
+2022-12-21 23:19:24.582 +01:00 [INF] Now listening on: http://localhost:57679
+2022-12-21 23:19:24.582 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-12-21 23:19:24.582 +01:00 [INF] Hosting environment: Development
+2022-12-21 23:19:24.582 +01:00 [INF] Content root path: /Users/maciejw/Projects/cleanarch7/src/cleanarch7.Web
+2022-12-21 23:19:32.601 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57679/ - -
+2022-12-21 23:19:32.649 +01:00 [WRN] Failed to determine the https port for redirect.
+2022-12-21 23:19:32.662 +01:00 [INF] Executing endpoint 'cleanarch7.Web.Controllers.HomeController.Index (cleanarch7.Web)'
+2022-12-21 23:19:32.665 +01:00 [INF] Route matched with {action = "Index", controller = "Home", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller cleanarch7.Web.Controllers.HomeController (cleanarch7.Web).
+2022-12-21 23:19:32.669 +01:00 [INF] Executing ViewResult, running view Index.
+2022-12-21 23:19:32.771 +01:00 [INF] Executed ViewResult - view Index executed in 103.2098ms.
+2022-12-21 23:19:32.772 +01:00 [INF] Executed action cleanarch7.Web.Controllers.HomeController.Index (cleanarch7.Web) in 106.6057ms
+2022-12-21 23:19:32.772 +01:00 [INF] Executed endpoint 'cleanarch7.Web.Controllers.HomeController.Index (cleanarch7.Web)'
+2022-12-21 23:19:32.776 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57679/ - - - 200 - text/html;+charset=utf-8 177.8696ms
+2022-12-21 23:19:32.792 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57679/cleanarch7.Web.styles.css?v=8cGie-8jnK87CsVSwWcrTLeQpFQQUGeQSZzfVoh5b5E - -
+2022-12-21 23:19:32.793 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57679/css/site.css?v=AKvNjO3dCPPS0eSU1Ez8T2wI280i08yGycV9ndytL-c - -
+2022-12-21 23:19:32.793 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57679/lib/bootstrap/dist/js/bootstrap.bundle.min.js - -
+2022-12-21 23:19:32.793 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57679/lib/jquery/dist/jquery.min.js - -
+2022-12-21 23:19:32.793 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57679/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0 - -
+2022-12-21 23:19:32.794 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57679/lib/bootstrap/dist/css/bootstrap.min.css - -
+2022-12-21 23:19:32.805 +01:00 [INF] Sending file. Request path: '/js/site.js'. Physical path: '/Users/maciejw/Projects/cleanarch7/src/cleanarch7.Web/wwwroot/js/site.js'
+2022-12-21 23:19:32.805 +01:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/css/bootstrap.min.css'. Physical path: '/Users/maciejw/Projects/cleanarch7/src/cleanarch7.Web/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css'
+2022-12-21 23:19:32.805 +01:00 [INF] Sending file. Request path: '/lib/jquery/dist/jquery.min.js'. Physical path: '/Users/maciejw/Projects/cleanarch7/src/cleanarch7.Web/wwwroot/lib/jquery/dist/jquery.min.js'
+2022-12-21 23:19:32.805 +01:00 [INF] Sending file. Request path: '/cleanarch7.Web.styles.css'. Physical path: '/Users/maciejw/Projects/cleanarch7/src/cleanarch7.Web/obj/Debug/net7.0/scopedcss/bundle/cleanarch7.Web.styles.css'
+2022-12-21 23:19:32.805 +01:00 [INF] Sending file. Request path: '/css/site.css'. Physical path: '/Users/maciejw/Projects/cleanarch7/src/cleanarch7.Web/wwwroot/css/site.css'
+2022-12-21 23:19:32.805 +01:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.bundle.min.js'. Physical path: '/Users/maciejw/Projects/cleanarch7/src/cleanarch7.Web/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js'
+2022-12-21 23:19:32.806 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57679/lib/bootstrap/dist/css/bootstrap.min.css - - - 200 162726 text/css 12.0502ms
+2022-12-21 23:19:32.806 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57679/cleanarch7.Web.styles.css?v=8cGie-8jnK87CsVSwWcrTLeQpFQQUGeQSZzfVoh5b5E - - - 200 1082 text/css 14.3560ms
+2022-12-21 23:19:32.806 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57679/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0 - - - 200 230 text/javascript 13.1787ms
+2022-12-21 23:19:32.806 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57679/lib/jquery/dist/jquery.min.js - - - 200 89478 text/javascript 13.5653ms
+2022-12-21 23:19:32.806 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57679/lib/bootstrap/dist/js/bootstrap.bundle.min.js - - - 200 78474 text/javascript 13.6348ms
+2022-12-21 23:19:32.806 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57679/css/site.css?v=AKvNjO3dCPPS0eSU1Ez8T2wI280i08yGycV9ndytL-c - - - 200 194 text/css 13.4806ms
+2022-12-21 23:19:38.633 +01:00 [INF] Application is shutting down...

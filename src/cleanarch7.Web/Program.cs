@@ -10,6 +10,9 @@ using FastEndpoints.Swagger.Swashbuckle;
 using FastEndpoints.ApiExplorer;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using Microsoft.Extensions.DependencyModel;
+
+Microsoft.Extensions.DependencyModel.CompilationOptions o = CompilationOptions.Default;
 
 var builder = WebApplication.CreateBuilder(args);
 

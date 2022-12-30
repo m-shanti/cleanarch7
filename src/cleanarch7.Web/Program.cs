@@ -12,13 +12,13 @@ using Microsoft.OpenApi.Models;
 using Serilog;
 using Microsoft.Extensions.DependencyModel;
 
-Microsoft.Extensions.DependencyModel.CompilationOptions o = CompilationOptions.Default;
+//Microsoft.Extensions.DependencyModel.CompilationOptions o = CompilationOptions.Default;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
-builder.Host.UseSerilog((_, config) => config.ReadFrom.Configuration(builder.Configuration));
+//builder.Host.UseSerilog((_, config) => config.ReadFrom.Configuration(builder.Configuration));
 
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {
